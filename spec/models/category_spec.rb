@@ -54,9 +54,18 @@ RSpec.describe Category, type: :model do
   end
 
   it 'sortable + restorable' do
+    category1 = create(:category)
+    category2 = create(:category)
     category.reload.update_attribute :sort, :up
+    category1.reload.update_attribute :sort, :up
+    category2.reload.update_attribute :sort, :up
+    expect(category1.reload.sort).to eq(1)
+    expect(category2.reload.sort).to eq(2)
+    expect(category.reload.sort).to eq(3)
     expect {
-      category.destroy
-    }.to change { category.reload.sort }.to(nil)
+      category1.destroy
+    }.to change { category.reload.sort }.to(2).and \
+      change { category2.reload.sort }.to(1).and \
+        change { category1.reload.sort }.to(nil)
   end
 end
