@@ -152,7 +152,7 @@ default:
     table_name: 'page_blocks'
     body_input: text
     blocks:
-      # name: label
+      default: 預設區塊
   article:
     enable: true
     enable_restore: false
