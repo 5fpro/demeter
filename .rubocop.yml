@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 AllCops:
   Exclude:
     - bin/**/*
@@ -66,13 +68,6 @@ Metrics/CyclomaticComplexity:
 
 Metrics/LineLength:
   Enabled: false
-
-Metrics/MethodLength:
-  CountComments: false  # count full line comments?
-  Max: 20
-
-Metrics/AbcSize:
-  Max: 30
 
 Rails/HasAndBelongsToMany:
   Enabled: false
