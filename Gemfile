@@ -40,6 +40,7 @@ group :development do
   gem 'http_logger'
   gem 'listen'
   gem 'rubocop'
+  gem 'rubocop-rails'
 
   gem 'rails_real_favicon'
 end
