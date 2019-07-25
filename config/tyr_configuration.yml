@@ -2,6 +2,8 @@ default:
   setting_yml_path: 'config/application.yml'
   db_dump:
     enable: true
+    s3:
+      enable: true
   db_backup:
     enable: true
     available_rails_envs:
@@ -39,8 +41,9 @@ default:
     view_path: 'tyr/services/robots'
     sitemap_url: '<%= "#{TyrSetting.default_protocol}://#{TyrSetting.assets_host}/sitemaps/sitemap.xml.gz" %>'
   event_log:
+    enable: true
     enable_admin_panel: true
-    class_name: 'Tyr::EventLog'
+    class_name: 'EventLog'
   comments:
     enable: true
   sidekiq:
@@ -65,6 +68,8 @@ default:
     enable: true
   admin:
     enable: true
+    auth_redirect_to: /
+    administrator_class_name: 'Administrator'
     route:
       path: '/admin'
     notifications:

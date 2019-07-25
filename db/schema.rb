@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_29_033633) do
+ActiveRecord::Schema.define(version: 2019_07_25_075437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2019_06_29_033633) do
 
   create_table "attachments", force: :cascade do |t|
     t.string "name"
-    t.string "description"
+    t.text "description"
     t.string "creator_type"
     t.integer "creator_id"
     t.string "item_type"
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 2019_06_29_033633) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_type", "creator_id"], name: "index_attachments_on_creator_type_and_creator_id"
+    t.index ["description"], name: "trgm_attachments_description_idx", opclass: :gist_trgm_ops, using: :gist
     t.index ["item_type", "item_id", "scope", "sort"], name: "index_attachments_on_item_type_and_item_id_and_scope_and_sort"
     t.index ["item_type", "item_id", "scope"], name: "index_attachments_on_item_type_and_item_id_and_scope"
     t.index ["item_type", "item_id", "sort"], name: "index_attachments_on_item_type_and_item_id_and_sort"
