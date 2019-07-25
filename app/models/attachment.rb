@@ -4,7 +4,7 @@
 #
 #  id                :bigint(8)        not null, primary key
 #  name              :string
-#  description       :string
+#  description       :text
 #  creator_type      :string
 #  creator_id        :integer
 #  item_type         :string
