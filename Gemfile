@@ -10,7 +10,7 @@ gem 'pg'
 
 # assets
 gem 'coffee-rails'
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'uglifier'
 
 # JS plugin
