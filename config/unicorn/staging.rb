@@ -7,6 +7,7 @@ app_path = "/home/apps/#{ENV['APP_NAME']}"
 working_directory "#{app_path}/current"
 pid "#{app_path}/current/tmp/pids/unicorn.pid"
 listen "/tmp/unicorn.#{ENV['APP_NAME']}.sock"
+timeout 60
 
 # default would be stderr_path
 # log rotate config example
