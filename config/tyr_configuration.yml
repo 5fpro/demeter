@@ -71,6 +71,7 @@ default:
     auth_redirect_to: /
     administrator_class_name: 'Administrator'
     route:
+      enable_404: true
       path: '/admin'
     notifications:
       enable: trye

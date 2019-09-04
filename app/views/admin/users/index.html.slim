@@ -1,5 +1,5 @@
-- append_page_button(tv('button-export', model: User), url_for(request.params.merge(format: :csv)))
-- append_page_button(tv('button-new', model: User), new_admin_user_path)
+- append_page_button(tv('button-export', model: User), url_for(request.params.merge(format: :csv)), icon: :download, color: :success)
+- append_page_button(tv('button-new', model: User), new_admin_user_path, icon: :plus, color: :primary)
 
 .row
   = admin_widget_box tv('widget-filtering', model: User) do
