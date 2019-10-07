@@ -40,10 +40,11 @@ default:
     enable: true
     view_path: 'tyr/services/robots'
     sitemap_url: '<%= "#{TyrSetting.default_protocol}://#{TyrSetting.assets_host}/sitemaps/sitemap.xml.gz" %>'
-  event_log:
+  sitemap:
     enable: true
-    enable_admin_panel: true
-    class_name: 'EventLog'
+    ping_search_engines: false
+    envs:
+      - production
   comments:
     enable: true
   sidekiq:
@@ -66,6 +67,21 @@ default:
     enable: true
   meta_tags:
     enable: true
+  mfa:
+    enable: false
+    time_until_expiration_by_hours: 24
+    cookie_key_suffix: mfa_credentials
+    cookie_options:
+      httponly: true
+      secure: <%= ENV['DEFAULT_PROTOCOL'] == 'http' ? false : true %>
+      domain: all
+    scopes:
+      administrator:
+        view_layout: tyr_admin_landing
+        view_path: new
+        success_redirect: '/admin'
+    whitelist_envs:
+      - development
   admin:
     enable: true
     auth_redirect_to: /
@@ -129,7 +145,12 @@ default:
     enable: true
   dalli:
     enable: true
+  event_log:
+    enable: true
+    enable_admin_panel: true
+    class_name: 'EventLog'
   transaction_log:
+    enable: true
     class_name: 'Tyr::TransactionLog'
   attachment:
     enable: true

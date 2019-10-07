@@ -4,3 +4,9 @@ dbbackup:
   decription: 'Backup database'
   queue: 'default'
   enable: true
+sitemap:
+  cron: '0 2 * * *'
+  class: Tyr::SitemapRefreshScheduler
+  decription: 'Generate sitemap'
+  queue: 'default'
+  enable: true
