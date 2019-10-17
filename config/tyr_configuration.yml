@@ -90,7 +90,7 @@ default:
       enable_404: true
       path: '/admin'
     notifications:
-      enable: trye
+      enable: true
       readed_context_class_name: 'Tyr::Notifications::ReadContext'
       read_all_context_class_name: 'Tyr::Notifications::ReadAllContext'
       sender_name_method: name
