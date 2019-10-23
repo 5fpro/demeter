@@ -9,7 +9,9 @@ namespace :dev do
   desc 'generate fake data for development'
   task fake: :environment do
     email = 'admin@5fpro.com'
-    Tyr::Administrator.find_by(email: email) || FactoryBot.create(:tyr_administrator, :root, email: email, password: '12341234')
+    password = '12341234'
+    Tyr::Administrator.find_by(email: email) || Tyr::Administrator.create(email: email, password: password, root: true)
+    puts "Admin email: #{email} password: '#{password}'"
   end
 
 end
