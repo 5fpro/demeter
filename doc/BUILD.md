@@ -1,5 +1,4 @@
-Requirements
-==========
+# Requirements
 
 See [Requirements](REQUIREMENTS.md) to install required programs in your MAC.
 
@@ -15,8 +14,7 @@ cd ..
 git clone git@github.com:5fpro/rails-template.git -b gh-pages --single-branch api-doc
 ```
 
-Build
-==========
+# Build
 
 ```
 bundle install
@@ -29,4 +27,20 @@ cp config/application.yml.example config/application.yml
 
 ```
 bundle exec rake dev:build
+```
+
+# DEV
+
+```shell
+foreman start -f Procfile.dev
+
+# or
+
+yarn run dev
+```
+
+Use Docker to run database
+
+```shell
+yarn start
 ```
