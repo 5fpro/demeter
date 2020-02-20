@@ -1,0 +1,43 @@
+$sans: 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', -apple-system,
+  'Avenir Next', PingFangTC-Light, HelveticaNeue-Light, 'Helvetica Neue Light',
+  'Helvetica Neue', Helvetica, 'Heiti TC', 'LiHei Pro', Arial, sans-serif;
+
+$regular: 300;
+$bold: 400;
+
+%T1 {
+  font-size: 10px;
+  line-height: 16px;
+}
+%T2 {
+  @extend %T1;
+  word-spacing: 1.2em;
+}
+%T3 {
+  font-size: 12px;
+  line-height: 20px;
+}
+%T4 {
+  font-size: 14px;
+  line-height: 24px;
+}
+%T5 {
+  font-size: 16px;
+  line-height: 30px;
+}
+%T6 {
+  font-size: 20px;
+  line-height: 32px;
+}
+%T7 {
+  font-size: 24px;
+  line-height: 36px;
+}
+%T8 {
+  font-size: 28px;
+  line-height: 40px;
+}
+%T9 {
+  font-size: 34px;
+  line-height: 48px;
+}

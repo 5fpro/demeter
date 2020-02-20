@@ -7,6 +7,7 @@ gem 'tyr', path: 'tyr'
 
 gem 'activerecord-postgis-adapter'
 gem 'pg'
+gem 'webpacker', '~> 4.x'
 
 # assets
 gem 'coffee-rails'

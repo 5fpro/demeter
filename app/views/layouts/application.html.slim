@@ -3,10 +3,11 @@ html
   head
     = render partial: 'favicon'
     = display_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': true
+    = javascript_pack_tag 'application', defer: '', 'data-turbolinks-track': true
     = csrf_meta_tags
     = csp_meta_tag
   body
+    main role='main' class=(yield :main_wrapper_class) = yield
+
     = render partial: 'ga'
-    = yield

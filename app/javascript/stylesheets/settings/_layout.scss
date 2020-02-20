@@ -1,0 +1,25 @@
+$rhythm-base: 8px;
+
+@function space($count) {
+  @return $count * $rhythm-base;
+}
+
+$column-width: space(9);
+$gutter-width: space(2);
+$grid-width: ($column-width + $gutter-width) * 12 + $gutter-width;
+$grid-padding: $gutter-width;
+
+$base-font-size: 14px;
+$layers: base, header;
+
+%container {
+  max-width: $grid-width;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: $grid-padding;
+  padding-right: $grid-padding;
+}
+
+@function get-z-index($name) {
+  @return index($layers, $name);
+}

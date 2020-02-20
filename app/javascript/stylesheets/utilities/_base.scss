@@ -1,0 +1,95 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  background: $white;
+}
+
+body {
+  @extend %T4;
+  display: flex;
+  flex-direction: column;
+  font-family: $sans;
+  font-weight: $regular;
+  color: $text-black;
+}
+
+main[role='main'] {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+  &:hover {
+    color: $gray;
+  }
+}
+
+button[type='button'],
+button[type='submit'],
+button[type='reset'] {
+  cursor: pointer;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.hidden {
+  display: none !important;
+}
+.container {
+  @extend %container;
+}
+.turbolinks-progress-bar {
+  background-color: $primary;
+}
+
+.hide-on-desktop {
+  @include media('>=desktop') {
+    display: none;
+  }
+}
+
+.show-on-desktop {
+  display: none;
+  @include media('>=desktop') {
+    display: block;
+  }
+}
+
+%normalize {
+  appearance: none;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  color: currentColor;
+}

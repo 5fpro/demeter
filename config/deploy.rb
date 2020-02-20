@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.11.2'
 
+set :nvm_node, 'v12.16.0'
+
 # Config@initial
 set :application, ENV.fetch('APP_NAME') { '5FPRO' }
 set :repo_url, 'git@github.com:5fpro/rails-template.git'
@@ -28,15 +30,18 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn sidekiq sidekiqctl}
 set :linked_files, fetch(:linked_files, []).push('.env', 'config/application.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/packs', 'node_modules')
 
 # Default value for default_env is {}
 set :default_env, {
-  'EXECJS_RUNTIME' => 'Node'
+  'EXECJS_RUNTIME' => 'Node',
+  'NODE_ENV' => 'production'
 }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+before 'deploy:assets:precompile', 'deploy:yarn_install'
 
 after 'deploy:publishing', 'deploy:restart'
 after 'deploy:published', 'bundler:clean'
@@ -44,6 +49,15 @@ after 'deploy:published', 'bundler:clean'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
+  end
+
+  desc 'Run rake yarn install'
+  task :yarn_install do
+    on roles(:web) do
+      within release_path do
+        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
+      end
+    end
   end
 end
 
