@@ -66,7 +66,7 @@ Style/WordArray:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 Rails/HasAndBelongsToMany:
@@ -175,3 +175,18 @@ Style/MixinUsage:
   Exclude:
     - 'spec/turnip_helper.rb'
     - 'spec/rails_helper.rb'
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
