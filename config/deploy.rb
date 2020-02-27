@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.11.2'
 
-set :nvm_node, 'v12.16.0'
+set :nvm_node, File.read('.nvmrc').strip
 
 # Config@initial
 set :application, ENV.fetch('APP_NAME') { '5FPRO' }
