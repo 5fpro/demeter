@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: mdillon/postgis
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  redis:
+    image: redis
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes:
+      - redis-data:/data
+    ports:
+      - '6379:6379'
+volumes:
+  db:
+  redis-data:
