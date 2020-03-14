@@ -24,6 +24,9 @@ defaults: &defaults
           label: .system
           subitems:
             -
+              label: '.settings.label'
+              link: admin_settings
+            -
               label: '.page_blocks.label'
               link: admin_page_blocks
             -

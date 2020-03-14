@@ -199,6 +199,13 @@ default:
     admin:
       enable: true
       articles_table_view_path: table
+  app_setting:
+    enable: true
+    class_name: AppSetting
+    storage_class_name: AppSettingStorage
+    admin:
+      enable: true
+      form_view_path: admin/settings/form
   redactor:
     enable: true
     default_js_options:
