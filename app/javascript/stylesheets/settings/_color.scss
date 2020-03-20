@@ -8,7 +8,13 @@ $red: #d41e1b;
 
 $gray: #4e5d78;
 
-$primary: $blue;
-$secondary: $gray;
+$pallete: (
+  primary: $blue,
+  secondary: $gray,
+  text: #2a2a2a,
+  turbolinks: $blue,
+);
 
-$text-black: #2a2a2a;
+@function pallete($key) {
+  @return map-get($pallete, $key);
+}
