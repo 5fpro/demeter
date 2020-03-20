@@ -1,0 +1,32 @@
+@function cdn-asset($name) {
+  @return url('https://#{$cdn-host}/statics/#{$name}');
+}
+
+@function cdn-retina-image-set($path, $ext) {
+  $x1: cdn-asset('#{$path}.#{$ext}');
+  $x2: cdn-asset('#{$path}@2x.#{$ext}');
+  $x3: cdn-asset('#{$path}@3x.#{$ext}');
+  @return image-set(#{$x1} 1x, #{$x2} 2x, #{$x3} 3x);
+}
+
+@mixin cdn-retina-background-image($path, $ext) {
+  background-image: cdn-asset('#{$path}.#{$ext}');
+  @each $format in $ext, webp {
+    background-image: cdn-retina-image-set($path, $format);
+  }
+}
+
+@function local-retina-image-set($path, $ext) {
+  @return image-set(
+    resolve('#{$path}.#{$ext}') 1x,
+    resolve('#{$path}@2x.#{$ext}') 2x,
+    resolve('#{$path}@3x.#{$ext}') 3x
+  );
+}
+
+@mixin local-retina-background-image($path, $ext) {
+  background-image: resovle('#{$path}.#{$ext}');
+  @each $format in $ext, webp {
+    background-image: local-retina-image-set($path, $format);
+  }
+}
