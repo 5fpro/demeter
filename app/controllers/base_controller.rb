@@ -4,6 +4,6 @@ class BaseController < ApplicationController
   def index; end
 
   def not_found
-    render status: :not_found
+    render status: :not_found, formats: :html
   end
 end

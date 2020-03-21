@@ -5,3 +5,5 @@ Feature: base_controller
   Scenario: 404
     When 瀏覽 /123asdasdas
       Then 頁面回應 404
+    When 瀏覽 /123asdasdas.txt
+      Then 頁面回應 404
