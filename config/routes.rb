@@ -21,5 +21,5 @@ Rails.application.routes.draw do
 
   mount Tyr::Engine => '/'
 
-  instance_exec(&Tyr.catch_not_found_route)
+  instance_exec(&Tyr.config.proc_route_404)
 end

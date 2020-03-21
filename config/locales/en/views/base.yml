@@ -2,3 +2,7 @@ en:
   base:
     index:
       hello: 'Hi!'
+    not_found:
+      meta:
+        title: 404 Not Found
+        description: 404 Not Found

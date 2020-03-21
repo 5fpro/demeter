@@ -1,5 +1,7 @@
 default:
   setting_yml_path: 'config/application.yml'
+  route:
+    not_found_to: 'base#not_found'
   db_dump:
     enable: true
     s3:

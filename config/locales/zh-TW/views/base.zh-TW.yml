@@ -2,3 +2,7 @@ zh-TW:
   base:
     index:
       hello: 'Hi!'
+    not_found:
+      meta:
+        title: 404頁面不存在
+        description: 404頁面不存在
