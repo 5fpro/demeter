@@ -2,12 +2,17 @@
 #
 # Table name: categories
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :bigint           not null, primary key
+#  deleted_at :datetime
 #  name       :string
+#  sort       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  deleted_at :datetime
-#  sort       :integer
+#
+# Indexes
+#
+#  index_categories_on_name  (name)
+#  index_categories_on_sort  (sort)
 #
 
 class Admin::Category < ::Category

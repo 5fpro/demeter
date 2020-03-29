@@ -2,14 +2,19 @@
 #
 # Table name: page_blocks
 #
-#  id              :bigint(8)        not null, primary key
-#  name            :string
+#  id              :bigint           not null, primary key
 #  body            :text
 #  enabled         :boolean          default(FALSE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  name            :string
 #  template_engine :string
 #  variables       :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_page_blocks_on_enabled  (enabled)
+#  index_page_blocks_on_name     (name)
 #
 
 FactoryBot.define do
