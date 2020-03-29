@@ -190,3 +190,6 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
