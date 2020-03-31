@@ -10,7 +10,6 @@
 #
 #  index_tags_on_name  (name) UNIQUE
 #
-
 FactoryBot.define do
   factory :tag do
 

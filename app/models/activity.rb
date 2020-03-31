@@ -3,15 +3,15 @@
 # Table name: activities
 #
 #  id          :bigint           not null, primary key
-#  acted_on    :date
-#  action      :string
 #  actor_type  :string
-#  data        :json
+#  actor_id    :integer
+#  action      :string
 #  target_type :string
+#  target_id   :integer
+#  acted_on    :date
+#  data        :json
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  actor_id    :integer
-#  target_id   :integer
 #
 # Indexes
 #
@@ -20,6 +20,5 @@
 #  index_activities_on_actor_type_and_actor_id    (actor_type,actor_id)
 #  index_activities_on_target_type_and_target_id  (target_type,target_id)
 #
-
 class Activity < Tyr::Activity
 end

@@ -10,6 +10,5 @@
 #
 #  index_tags_on_name  (name) UNIQUE
 #
-
 class Tag < Tyr::Tag
 end

@@ -3,11 +3,11 @@
 # Table name: event_logs
 #
 #  id          :bigint           not null, primary key
+#  event_type  :string
+#  description :string
+#  identity    :string
 #  created_on  :date
 #  data        :json
-#  description :string
-#  event_type  :string
-#  identity    :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -17,6 +17,5 @@
 #  index_event_logs_on_event_type               (event_type)
 #  index_event_logs_on_event_type_and_identity  (event_type,identity)
 #
-
 class EventLog < Tyr::EventLog
 end

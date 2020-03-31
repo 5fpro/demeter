@@ -3,24 +3,24 @@
 # Table name: attachments
 #
 #  id                :bigint           not null, primary key
-#  creator_type      :string
-#  data              :json
-#  description       :text
-#  file_content_type :string
-#  file_size         :integer
-#  image_exif        :json
-#  image_height      :integer
-#  image_width       :integer
-#  item_type         :string
 #  name              :string
-#  original_filename :string
+#  description       :text
+#  creator_type      :string
+#  creator_id        :integer
+#  item_type         :string
+#  item_id           :integer
 #  scope             :string
 #  sort              :integer
+#  original_filename :string
 #  stored_filename   :string
+#  file_content_type :string
+#  file_size         :integer
+#  image_width       :integer
+#  image_height      :integer
+#  image_exif        :json
+#  data              :json
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  creator_id        :integer
-#  item_id           :integer
 #
 # Indexes
 #
@@ -31,7 +31,6 @@
 #  index_attachments_on_item_type_and_item_id_and_sort            (item_type,item_id,sort)
 #  trgm_attachments_description_idx                               (description) USING gist
 #
-
 class ImageAttachment < Attachment
   uploader ImageUploader
 end
