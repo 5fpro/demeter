@@ -38,15 +38,6 @@ class Admin::User < ::User
     def has_avatar(_boolean = true)
       where.not(avatar: nil)
     end
-
-    def to_csv(opts = {})
-      CSV.generate(opts) do |csv|
-        csv << ['ID', 'Name', 'Email']
-        offset(0).limit(relation.count).all.find_each do |o| # reset pagination
-          csv << [o.id, o.name, o.email]
-        end
-      end
-    end
   end
 
 end

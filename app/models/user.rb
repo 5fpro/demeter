@@ -31,4 +31,9 @@
 class User < Tyr::ApplicationRecord
   omniauthable
   mount_uploader :avatar, AvatarUploader
+
+  # devise :database_authenticatable, :trackable, :validatable, :registerable, :confirmable, :recoverable
+  def label
+    name
+  end
 end

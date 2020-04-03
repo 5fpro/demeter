@@ -11,7 +11,7 @@ Feature: 使用者後台列表
        And 頁面 包含 Mars
        And 頁面 包含 Peter
   Scenario: 可搜尋
-    When 到後台 /users?q[name_cont]=mars
+    When 到後台 /users?q_user[name_cont]=mars
       Then 頁面回應 正常
        And 頁面 包含 Mars
        And 頁面 不含 Peter
@@ -20,7 +20,7 @@ Feature: 使用者後台列表
       Then 頁面回應 正常
        And 頁面 包含 Mars
        And 頁面 包含 Peter
-    When 到後台 /users.csv?q[name_cont]=mars
+    When 到後台 /users.csv?q_user[name_cont]=mars
       Then 頁面回應 正常
        And 頁面 包含 Mars
        And 頁面 不含 Peter

@@ -1,25 +1,25 @@
 zh-TW:
   admin:
     users:
-      breadcrumb: '使用者'
+      breadcrumb: 使用者
       index:
         meta:
-          title: 'Users'
+          title: 使用者
       show:
         meta:
-          title: "User %{identity}"
+          title: "使用者 %{label}"
       new:
         meta:
-          title: 'New User'
-        breadcrumb: 'New'
+          title: 新增使用者
+        breadcrumb: 新增
       edit:
         meta:
-          title: "Edit User %{identity}"
-        breadcrumb: "Edit"
+          title: "編輯使用者 %{label}"
+        breadcrumb: 編輯
       create:
-        success: 'User %{identity} created'
+        success: '使用者 %{label} 新增成功'
       update:
-        success: 'User %{identity} updated'
+        success: '使用者 %{label} 已更新'
       destroy:
-        success: 'User %{identity} destroyed'
+        success: '使用者 %{label} 已刪除'
 

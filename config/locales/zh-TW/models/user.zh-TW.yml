@@ -12,14 +12,18 @@ zh-TW:
         name: 名稱
         avatar: 頭像
         confirmed: 已認證
-        email: email
+        password: 登入密碼
+        email: Email
+        sign_in_count: 登入次數
         last_sign_in_at: "上次登入於"
         last_sign_in_ip: "上次登入的IP位址"
+      admin/user:
+        <<: *user
     models:
       user: 使用者
   simple_form:
     labels:
-      q:
+      q_user:
         name_cont: 名稱包含
         email_cont: Email 包含
         has_avatar: 有頭像
@@ -27,4 +31,6 @@ zh-TW:
         <<: *user
     placeholders:
       user:
+        <<: *user
+      admin/user:
         <<: *user

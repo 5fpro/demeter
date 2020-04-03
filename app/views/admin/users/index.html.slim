@@ -24,6 +24,6 @@
             td
               = tv('yes') if user.try(:confirmed?)
             td
-              = admin_link_to tv('show'), admin_user_path(user)
-              = admin_link_to tv('edit'), edit_admin_user_path(user), color: 'success'
-              = admin_link_to tv('delete'), admin_user_path(user), method: :delete, 'data-confirm': tv('delete-confirm'), color: 'danger'
+              = admin_link_to tv('show'), admin_user_path(user), size: :s, icon: :info
+              = admin_link_to tv('edit'), edit_admin_user_path(user), color: :success, size: :s, icon: :pencil
+              = admin_link_to tv('delete'), admin_user_path(user), method: :delete, 'data-confirm': tv('delete-confirm'), color: :danger, size: :s, icon: :remove
