@@ -17,7 +17,7 @@
 @mixin cdn-retina-background-image($path, $ext) {
   background-image: cdn-asset('#{$path}.#{$ext}');
   background-image: cdn-retina-image-set($path, webp);
-  /* autoprefixer: ignore next */
+  /*! autoprefixer: ignore next */
   background-image: cdn-retina-image-set($path, $ext);
 }
 
@@ -30,6 +30,6 @@
 @mixin local-retina-background-image($path, $ext) {
   background-image: resovle('#{$path}.#{$ext}');
   background-image: local-retina-image-set($path, webp);
-  /* autoprefixer: ignore next */
+  /*! autoprefixer: ignore next */
   background-image: local-retina-image-set($path, $ext);
 }

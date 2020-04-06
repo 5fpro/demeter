@@ -15,5 +15,8 @@ module.exports = {
       },
       stage: false,
     }),
+    require('postcss-discard-comments')({
+      removeAll: true,
+    }),
   ],
 };

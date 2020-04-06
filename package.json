@@ -21,6 +21,7 @@
     "normalize.css": "^8.0.1",
     "pnp-webpack-plugin": "^1.6.4",
     "postcss-assets": "^5.0.0",
+    "postcss-discard-comments": "^4.0.2",
     "postcss-short": "^5.0.0",
     "scut": "^1.4.0",
     "svg-sprite-loader": "^4.2.1",
