@@ -18,6 +18,8 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/passenger
 #
 # require 'capistrano/rvm'
+require 'capistrano/nvm'
+require 'capistrano/yarn'
 require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 require 'capistrano/bundler'

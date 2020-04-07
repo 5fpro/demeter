@@ -166,6 +166,8 @@ GEM
       capistrano (~> 3.1)
     capistrano-git-with-submodules (2.0.3)
       capistrano (~> 3.7)
+    capistrano-nvm (0.0.7)
+      capistrano (~> 3.1)
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -175,6 +177,8 @@ GEM
     capistrano-sidekiq (1.0.3)
       capistrano (>= 3.9.0)
       sidekiq (>= 3.4, < 6.0)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
     carrierwave (2.1.0)
@@ -591,9 +595,11 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-git-with-submodules
+  capistrano-nvm
   capistrano-rails
   capistrano-rbenv
   capistrano-sidekiq
+  capistrano-yarn
   capistrano3-unicorn
   coffee-rails
   database_cleaner

@@ -5,9 +5,9 @@ set :ssh_options, {
   forward_agent: true
 }
 
-servers = ['template.5fpro.com']
+servers = ['3.113.16.99']
 
-shadow_server = 'template.5fpro.com'
+shadow_server = '3.113.16.99'
 role :app,                servers
 role :web,                servers + [shadow_server]
 role :db,                 shadow_server

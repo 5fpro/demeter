@@ -1,7 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.11.2'
-
-set :nvm_node, File.read('.nvmrc').strip
+lock '3.12.1'
 
 # Config@initial
 set :application, ENV.fetch('APP_NAME') { '5FPRO' }
@@ -16,6 +14,10 @@ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
 set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn sidekiq sidekiqctl}
+
+set :nvm_node, File.read('.nvmrc').strip
+set :nvm_map_bins, %w{node npm yarn}
+set :nvm_type, :user
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -35,13 +37,12 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for default_env is {}
 set :default_env, {
   'EXECJS_RUNTIME' => 'Node',
-  'NODE_ENV' => 'production'
+  'NODE_ENV' => 'production',
+  'PATH' => "$PATH:$HOME/.nvm/versions/node/#{fetch(:nvm_node)}/bin"
 }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-before 'deploy:assets:precompile', 'deploy:yarn_install'
 
 after 'deploy:publishing', 'deploy:restart'
 after 'deploy:published', 'bundler:clean'
@@ -49,15 +50,6 @@ after 'deploy:published', 'bundler:clean'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
-  end
-
-  desc 'Run rake yarn install'
-  task :yarn_install do
-    on roles(:web) do
-      within release_path do
-        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
-      end
-    end
   end
 end
 

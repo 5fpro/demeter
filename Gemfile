@@ -29,9 +29,11 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-git-with-submodules'
+  gem 'capistrano-nvm', require: false
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-sidekiq'
+  gem 'capistrano-yarn'
   gem 'capistrano3-unicorn'
   # slack
   gem 'slackistrano', require: false
