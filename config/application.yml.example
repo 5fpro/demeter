@@ -1,4 +1,8 @@
 defaults: &defaults
+  host: <%= ENV['APP_HOST'] %>
+  default_protocol: <%= ENV['DEFAULT_PROTOCOL'].presence || 'http' %>
+  assets_host: <%= ENV['ASSET_HOST'] %>
+  cdn_host: "<%= ENV['CDN_HOST'].presence || ENV['CARRIERWAVE_ASSET_HOST'].presence || ENV['ASSET_HOST'] %>"
   dalli:
     servers:
     - "<%= ENV['MEMCACHED_SERVER'] %>"
