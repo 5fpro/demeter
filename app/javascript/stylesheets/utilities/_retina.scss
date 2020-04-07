@@ -1,0 +1,35 @@
+@function cdn-asset($name) {
+  @return url('https://#{$cdn-host}/statics/#{$name}');
+}
+
+@function assets-image-set($assets, $ext) {
+  @return if($ext == webp, -webkit-image-set($assets), image-set($assets));
+}
+
+@function cdn-retina-image-set($path, $ext) {
+  $x1: cdn-asset('#{$path}.#{$ext}');
+  $x2: cdn-asset('#{$path}@2x.#{$ext}');
+  $x3: cdn-asset('#{$path}@3x.#{$ext}');
+  $assets: #{$x1} 1x, #{$x2} 2x, #{$x3} 3x;
+  @return assets-image-set($assets, $ext);
+}
+
+@mixin cdn-retina-background-image($path, $ext) {
+  background-image: cdn-asset('#{$path}.#{$ext}');
+  background-image: cdn-retina-image-set($path, webp);
+  /*! autoprefixer: ignore next */
+  background-image: cdn-retina-image-set($path, $ext);
+}
+
+@function local-retina-image-set($path, $ext) {
+  $assets: resolve('#{$path}.#{$ext}') 1x, resolve('#{$path}@2x.#{$ext}') 2x,
+    resolve('#{$path}@3x.#{$ext}') 3x;
+  @return assets-image-set($assets, $ext);
+}
+
+@mixin local-retina-background-image($path, $ext) {
+  background-image: resovle('#{$path}.#{$ext}');
+  background-image: local-retina-image-set($path, webp);
+  /*! autoprefixer: ignore next */
+  background-image: local-retina-image-set($path, $ext);
+}

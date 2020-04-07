@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   font-family: $sans;
   font-weight: $regular;
-  color: $text-black;
+  color: pallete(text);
 }
 
 main[role='main'] {
@@ -35,7 +35,7 @@ img {
 }
 
 a {
-  color: $primary;
+  color: pallete(primary);
   text-decoration: none;
   &:hover {
     color: $gray;
@@ -67,7 +67,7 @@ button[type='reset'] {
   @extend %container;
 }
 .turbolinks-progress-bar {
-  background-color: $primary;
+  background-color: pallete(turbolinks);
 }
 
 .hide-on-desktop {
