@@ -5,9 +5,11 @@
 :queues:
   - [default, 1]
   - [rollbar, 1]
+  - [mailers, 1]
 :limits:
   default: 1
   rollbar: 1
+  mailers: 1
 staging:
   :concurrency: 2
 production:

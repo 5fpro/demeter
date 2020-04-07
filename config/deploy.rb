@@ -30,7 +30,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails unicorn sidekiq sidekiqctl}
 set :linked_files, fetch(:linked_files, []).push('.env', 'config/application.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/packs', 'node_modules')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/packs', 'node_modules', 'public/sitemaps')
 
 # Default value for default_env is {}
 set :default_env, {
