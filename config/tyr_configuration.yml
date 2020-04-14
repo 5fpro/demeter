@@ -6,6 +6,8 @@ default:
     enable: true
     s3:
       enable: true
+      bucket: <%= ENV['ASSET_AWS_BUCKET'] || 'dump' %>
+      path: dumps
   db_backup:
     enable: true
     available_rails_envs:
@@ -86,11 +88,16 @@ default:
       - development
   admin:
     enable: true
+    enable_mfa: false
+    display_account_menu: true
     auth_redirect_to: /
-    administrator_class_name: 'Administrator'
     route:
       enable_404: true
       path: '/admin'
+    form_input_view: tyr/admin/base/templates/form_input
+    administrator_class_name: 'Administrator'
+    assets:
+      cdn_host: 'assets.5fpro.com'
     notifications:
       enable: true
       readed_context_class_name: 'Tyr::Notifications::ReadContext'
@@ -98,12 +105,16 @@ default:
       sender_name_method: name
       default_sender_avatar: 'icon-100px.png'
       body_input: redactor
+    handle_error_method: handle_error
   asset_sync:
     enable: true
+    fog_public: true
+    existing_remote_files: keep
   asset_host:
     enable: true
   carrierwave:
     enable: true
+    fog_public: true
   locale:
     enable: true
     default: en
@@ -149,8 +160,13 @@ default:
     enable: true
   event_log:
     enable: true
-    enable_admin_panel: true
     class_name: 'EventLog'
+    admin:
+      enable: true
+      scope_view_path:
+    # scopes:
+    #   default:
+    #     class_name: Tyr::EventLog
   transaction_log:
     enable: true
     class_name: 'Tyr::TransactionLog'
@@ -167,6 +183,10 @@ default:
     enable: true
   taggable:
     enable: true
+  time_range_searchable:
+    enable: false
+  ransackable:
+    enable: false
   charts:
     enable: true
   phonelib:
@@ -174,12 +194,24 @@ default:
     default_country: 'TW'
   activity:
     enable: true
+    admin:
+      enable: true
+      scope_view_path:
     class_name: Activity
+    # scopes:
+    #   default:
+    #     class_name: Tyr::Activity
   page_block:
     enable: true
     class_name: 'PageBlock'
     table_name: 'page_blocks'
-    body_input: text
+    admin:
+      enable: true
+      views:
+        filtering: tyr/admin/page_blocks/filtering
+        table: tyr/admin/page_blocks/table
+        form: tyr/admin/page_blocks/form
+      body_input: text
     blocks:
       default: 預設區塊
   article:
@@ -196,11 +228,50 @@ default:
         category_max_deeps: 1
         article_class_name: Article
         category_class_name: ArticleCategory
-      blog:
-        category_max_deeps: 2
     admin:
       enable: true
-      articles_table_view_path: table
+      views:
+        article:
+          table: table
+          filtering: filtering
+          btns: btns
+          detail: detail
+          form_prefix: form_
+        category:
+          table: table
+          filtering: filtering
+          btns: btns
+          detail: detail
+          form: form
+          index_btns: index_btns
+      views:
+        article:
+          table: table
+          filtering: filtering
+          btns: btns
+          detail: detail
+          form_prefix: form_
+        category:
+          table: table
+          filtering: filtering
+          btns: btns
+          detail: detail
+          form: form
+          index_btns: index_btns
+  pageview:
+    enable: false
+    geodecode:
+      enable: false
+      ipstack_api_key:
+    default_class_name: Tyr::Pageview
+    scopes:
+      - default
+    visitors:
+      - user
+    targets:
+      - user
+    admin:
+      enable: false
   app_setting:
     enable: true
     class_name: AppSetting
