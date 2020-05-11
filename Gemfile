@@ -6,6 +6,7 @@ gem 'rails', '~> 5.2'
 gem 'tyr', path: 'tyr'
 
 gem 'activerecord-postgis-adapter'
+gem 'faraday'
 gem 'pg'
 gem 'webpacker', '~> 4.x'
 
