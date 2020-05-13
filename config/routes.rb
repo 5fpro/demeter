@@ -3,21 +3,13 @@ Rails.application.routes.draw do
     scope module: 'api' do
       root to: 'base#index', as: :api_root
       get '/error', to: 'base#error'
-    end
-  end
-
-  namespace :admin do
-    root to: 'base#index'
-    resources :users
-    resources :categories do
-      member do
-        get :revisions
-        post :restore
+      resources :banks, only: [:index] do
+        collection do
+          get :branch_list
+        end
       end
     end
   end
-
-  root to: 'base#index'
 
   mount Tyr::Engine => '/'
 
