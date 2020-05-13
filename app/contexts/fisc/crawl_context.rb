@@ -1,16 +1,14 @@
-require 'CSV'
+require 'csv'
 
 module Fisc
-  class Crawl
-    def initialize(url)
-      # https://www.fisc.com.tw/TC/OPENDATA/R2_Location.csv
+  class CrawlContext
+    def initialize(url: 'https://www.fisc.com.tw/TC/OPENDATA/R2_Location.csv')
       @url = url
     end
 
     def perform
       csv_content = Faraday.get(@url).body.force_encoding('utf-8')
       params = CSV.parse(csv_content, liberal_parsing: true, headers: true).map do |content|
-        # <CSV::Row "銀行代號":"000" "分支機構代號":nil "金融機構名稱":"中央銀行國庫局" "分支機構名稱":nil "地址":"台北市中正區羅斯福路一段２號">
         if content[1].nil?
           parse_bank_data(content)
         else
@@ -38,7 +36,7 @@ module Fisc
       {
         bank_code: data[0],
         code: data[1],
-        name: data[2],
+        name: data[3],
         address: data[4],
         type: 'branch'
       }
@@ -56,7 +54,7 @@ module Fisc
     def find_update_or_create_branch(branch_params)
       code = branch_params[:code]
       bank = Bank.find_by(code: branch_params[:bank_code])
-      return if code.blank?
+      return ::Tyr::LogEventContext.new("bank_not_found", identity: nil, data: branch_params, description: bank).perform if bank.blank?
 
       type = branch_params.delete(:type)
       branch_params.delete(:bank_code)

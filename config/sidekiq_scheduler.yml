@@ -10,3 +10,9 @@ sitemap:
   decription: 'Generate sitemap'
   queue: 'default'
   enable: true
+bank_branch_check:
+  cron: '0 0 * * SUN'
+  class: 'BankBranchCheckScheduler'
+  description: '檢查銀行/分行是否有更新'
+  queue: 'default'
+  enabled: true
