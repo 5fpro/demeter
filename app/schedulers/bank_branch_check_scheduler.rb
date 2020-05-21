@@ -1,5 +1,5 @@
 class BankBranchCheckScheduler < BaseScheduler
   def perform
-    Fisc::Crawl.new.perform
+    Fisc::CrawlContext.new.perform
   end
 end

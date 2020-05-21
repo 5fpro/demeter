@@ -13,4 +13,11 @@ class Bank < ApplicationRecord
   validates :code, uniqueness: true
 
   has_many :branches, dependent: :destroy
+
+  def to_h
+    {
+      code: code,
+      name: name
+    }
+  end
 end

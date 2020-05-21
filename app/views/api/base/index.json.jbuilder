@@ -1,1 +1,0 @@
-json.array! @banks, :code, :name

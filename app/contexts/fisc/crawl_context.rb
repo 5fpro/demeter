@@ -1,7 +1,7 @@
 require 'csv'
 
 module Fisc
-  class CrawlContext
+  class CrawlContext < BaseContext
     def initialize(url: 'https://www.fisc.com.tw/TC/OPENDATA/R2_Location.csv')
       @url = url
     end
@@ -54,7 +54,7 @@ module Fisc
     def find_update_or_create_branch(branch_params)
       code = branch_params[:code]
       bank = Bank.find_by(code: branch_params[:bank_code])
-      return ::Tyr::LogEventContext.new("bank_not_found", identity: nil, data: branch_params, description: bank).perform if bank.blank?
+      return ::Tyr::LogEventContext.new('bank_not_found', identity: nil, data: branch_params, description: bank).perform if bank.blank?
 
       type = branch_params.delete(:type)
       branch_params.delete(:bank_code)
