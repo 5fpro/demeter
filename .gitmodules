@@ -1,3 +1,7 @@
 [submodule "tyr"]
 	path = tyr
 	url = git@github.com:5fpro/tyr.git
+[submodule "dist"]
+	path = dist
+	url = git@github.com:5fpro/demeter.git
+	branch = gh-pages
