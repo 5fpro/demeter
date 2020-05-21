@@ -12,8 +12,8 @@
 #
 FactoryBot.define do
   factory :branch do
-    code { "MyString" }
-    name { "MyString" }
-    address { "MyString" }
+    code { 'MyString' }
+    name { 'MyString' }
+    address { 'MyString' }
   end
 end
