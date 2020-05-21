@@ -604,6 +604,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   factory_bot_rails
+  faraday
   http_logger
   jquery-rails
   listen

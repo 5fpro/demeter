@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_075437) do
+ActiveRecord::Schema.define(version: 2020_05_06_090503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -152,6 +152,22 @@ ActiveRecord::Schema.define(version: 2019_07_25_075437) do
     t.index ["auth_type", "auth_id", "provider"], name: "index_authorizations_on_auth_type_and_auth_id_and_provider"
     t.index ["auth_type", "auth_id"], name: "index_authorizations_on_auth_type_and_auth_id"
     t.index ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
+  end
+
+  create_table "banks", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "branches", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "address"
+    t.integer "bank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
