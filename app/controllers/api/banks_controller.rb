@@ -4,8 +4,8 @@ module Api
       @banks = Bank.all
     end
 
-    def branch_list
-      @branches = Branch.all
+    def branches
+      @branches = Bank.find_by(code: params[:id]).branches
     end
   end
 end

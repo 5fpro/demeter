@@ -1,1 +1,0 @@
-json.array! @branches, :code, :name, :address

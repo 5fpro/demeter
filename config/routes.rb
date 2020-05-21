@@ -4,8 +4,8 @@ Rails.application.routes.draw do
       root to: 'base#index', as: :api_root
       get '/error', to: 'base#error'
       resources :banks, only: [:index] do
-        collection do
-          get :branch_list
+        member do
+          get :branches
         end
       end
     end
