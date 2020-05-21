@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'base#index'
   constraints Tyr.config.api_constraints do
     scope module: 'api' do
       root to: 'base#index', as: :api_root
