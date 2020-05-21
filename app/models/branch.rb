@@ -16,4 +16,13 @@ class Branch < ApplicationRecord
 
   belongs_to :bank
   scope :same_bank, ->(bank) { where(bank: bank) }
+
+  def to_h
+    {
+      branch_code: code,
+      bank_branch_code: "#{bank.code}#{code}",
+      address: address,
+      name: name
+    }
+  end
 end

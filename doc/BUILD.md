@@ -5,7 +5,7 @@ See [Requirements](REQUIREMENTS.md) to install required programs in your MAC.
 ## Git clone
 
 ```
-git clone -b develop --recursive-submodules git@github.com:5fpro/rails-template.git
+git clone -b develop --recursive-submodules git@github.com:5fpro/demeter.git
 cd rails-template/tyr
 git checkout develop
 cd ..

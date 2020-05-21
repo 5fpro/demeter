@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  root to: 'base#index'
   mount Tyr::Engine => '/'
 
   instance_exec(&Tyr.config.proc_route_404)
