@@ -4,12 +4,47 @@ class ExportToDistContext < BaseContext
   end
 
   def perform
-    # export_banks!
-    # export_countries!
+    export_index!
+    export_banks!
+    export_countries!
     export_zipcodes!
   end
 
   private
+
+  def export_index!
+    IO.write(@dir.join('index.html'), '<script>location.href="/index.json";</script>')
+    index_data = {
+      bank: "#{production_url}/banks.json",
+      country: {
+        all: "#{production_url}/countries.json",
+        one: {
+          format: "#{production_url}/country/{country_code}.json",
+          examples: [
+            "#{production_url}/country/TW.json",
+            "#{production_url}/country/JP.json"
+          ]
+        }
+      },
+      zipcode: {
+        country: {
+          format: "#{production_url}/{country_code(lower case)}/zipcode{type}.json",
+          types: {
+            all: "#{production_url}/tw/zipcodes.json",
+            cities: "#{production_url}/tw/zipcode/cities.json"
+          }
+        },
+        city: {
+          format: "#{production_url}/{country_code(lower case)}/zipcode/{city_name}.json",
+          examples: [
+            "#{production_url}/tw/zipcode/臺北市.json",
+            "#{production_url}/tw/zipcode/臺南市.json"
+          ]
+        }
+      }
+    }
+    IO.write(@dir.join('index.json'), index_data.to_json)
+  end
 
   def production_url
     'https://demeter.5fpro.com'
@@ -17,7 +52,7 @@ class ExportToDistContext < BaseContext
 
   def export_banks!
     `rm -rf #{@dir.join('banks')}`
-    IO.write(@dir.join('banks.json'), Bank.all.map(&:to_h).to_json)
+    IO.write(@dir.join('banks.json'), Bank.all.map { |b| b.to_h.merge(branches_endpoint: "#{production_url}/banks/#{b.code}.json") }.to_json)
     branch_dir = @dir.join('banks')
     `mkdir -p #{branch_dir}`
     Bank.find_each do |bank|
@@ -28,7 +63,7 @@ class ExportToDistContext < BaseContext
   def export_countries!
     `rm -rf #{@dir.join('country')}`
     `rm -rf #{@dir.join('countries.json')}`
-    IO.write(@dir.join('countries.json'), Country.all.map(&:to_h).to_json)
+    IO.write(@dir.join('countries.json'), Country.all.map { |c| c.to_h.merge(endpoint: "#{production_url}/country/#{c.code}.json") }.to_json)
     branch_dir = @dir.join('country')
     `mkdir -p #{branch_dir}`
     Country.find_each do |country|
