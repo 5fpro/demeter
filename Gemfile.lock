@@ -59,6 +59,7 @@ PATH
       spreadsheet (> 0)
       sprockets (~> 3)
       tappay (> 0)
+      uglifier (> 4)
       yaml_db (> 0)
 
 GEM
@@ -442,6 +443,9 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    restcountry (0.6.0)
+      faraday
+      json
     rexml (3.2.4)
     rgeo (2.1.1)
     rgeo-activerecord (6.2.1)
@@ -611,6 +615,7 @@ DEPENDENCIES
   pg
   rails (~> 5.2)
   rails_real_favicon
+  restcountry
   rspec
   rspec-rails
   rubocop
