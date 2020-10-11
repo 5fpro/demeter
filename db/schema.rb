@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_083021) do
+ActiveRecord::Schema.define(version: 2020_10_11_092846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -307,6 +307,19 @@ ActiveRecord::Schema.define(version: 2020_10_11_083021) do
     t.datetime "created_at"
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  create_table "zipcodes", force: :cascade do |t|
+    t.string "country_code"
+    t.string "code"
+    t.string "name"
+    t.string "state"
+    t.string "city"
+    t.jsonb "data", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_code", "code"], name: "index_zipcodes_on_country_code_and_code"
+    t.index ["country_code"], name: "index_zipcodes_on_country_code"
   end
 
 end

@@ -59,6 +59,7 @@ PATH
       spreadsheet (> 0)
       sprockets (~> 3)
       tappay (> 0)
+      uglifier (> 4)
       yaml_db (> 0)
 
 GEM
