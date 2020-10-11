@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_090503) do
+ActiveRecord::Schema.define(version: 2020_10_11_083021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -178,6 +178,14 @@ ActiveRecord::Schema.define(version: 2020_05_06_090503) do
     t.integer "sort"
     t.index ["name"], name: "index_categories_on_name"
     t.index ["sort"], name: "index_categories_on_sort"
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "code"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_countries_on_code"
   end
 
   create_table "event_logs", force: :cascade do |t|
