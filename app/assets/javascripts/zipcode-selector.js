@@ -1,16 +1,16 @@
-$cityData = {};
-$distData = {};
-$Gaia = {};
-$Gaia.init_zipcode_selector = function() {
+$Demeter = {};
+$DemeterTWCityData = {};
+$DemeterTWDistData = {};
+$Demeter.initTWZipcodeSelector = function(trigger_selector) {
   $.ajax({ url: 'https://demeter.5fpro.com/tw/zipcode/cities.json', async: false, success: function(data) {
-    $cityData = data;
+    $DemeterTWCityData = data;
   }});
   $.ajax({ url: 'https://demeter.5fpro.com/tw/zipcodes.json', async: false, success: function(data) {
-    $distData = data;
+    $DemeterTWDistData = data;
   }});
   var findDist = function(zipcode) {
     var res = null
-    $distData.forEach(function(dist) {
+    $DemeterTWDistData.forEach(function(dist) {
       if(dist.zipcode == zipcode) {
         res = dist;
       }
@@ -19,7 +19,7 @@ $Gaia.init_zipcode_selector = function() {
   }
   var findCity = function(city_name) {
     var res = null
-    $cityData.forEach(function(city) {
+    $DemeterTWCityData.forEach(function(city) {
       if(city.name == city_name) {
         res = city;
       }
@@ -45,7 +45,7 @@ $Gaia.init_zipcode_selector = function() {
     var zipcodeInput = this;
     var citySelect = this.citySelect;
     citySelect.html('<option>' + this.citySelect.attr('placeholder') +'</option>');
-    $cityData.forEach(function(city) {
+    $DemeterTWCityData.forEach(function(city) {
       if(zipcodeInput.is_exclude(city.name)) { return; }
       var selected = city.name == city_name ? ' selected' : ''
       citySelect.append('<option value="' + city.name + '"' + selected + '>' + city.name + '</option>')
@@ -82,7 +82,8 @@ $Gaia.init_zipcode_selector = function() {
   var is_exclude = function(value) {
     return this.exclude.includes(value);
   }
-  $('.js-gaia-zipcode').each(function() {
+  trigger_selector = trigger_selector || '.js-demeter-tw-zipcode-selector';
+  $(trigger_selector).each(function() {
     var zipcode = this;
     zipcode.citySelect = $($(zipcode).data('city'));
     zipcode.distSelect = $($(zipcode).data('dist'));
@@ -115,5 +116,5 @@ $Gaia.init_zipcode_selector = function() {
 }
 
 $(function() {
-  $Gaia.init_zipcode_selector();
+  $Demeter.initTWZipcodeSelector();
 })
