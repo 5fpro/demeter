@@ -8,6 +8,7 @@ class ExportToDistContext < BaseContext
     export_banks!
     export_countries!
     export_zipcodes!
+    `cp #{Rails.root.join('app/assets/javascripts/zipcode-selector.js')} #{@dir.join('tw')}`
   end
 
   private
@@ -72,6 +73,7 @@ class ExportToDistContext < BaseContext
   end
 
   def export_zipcodes!
+    `cp #{Rails.root.join('app/assets/javascripts/zipcode-selector.js')} #{@dir.join('/')}`
     Country.find_each do |country|
       country_code = country.code.to_s.downcase
       country_dir = @dir.join(country_code)
