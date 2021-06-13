@@ -101,6 +101,7 @@ $Gaia.init_zipcode_selector = function() {
       }, 500)
     })
     zipcode.citySelect.on('change', function() {
+      $(zipcode).val('');
       zipcode.initDistSelect($(this).val());
     });
     zipcode.distSelect.on('change', function() {
