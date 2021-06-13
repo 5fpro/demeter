@@ -61,7 +61,7 @@ $Gaia.init_zipcode_selector = function() {
         dists.forEach(function(dist) {
           if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
           var selected = dist.zipcode == selected_dist.zipcode ? ' selected' : ''
-          distSelect.append('<option value="' + dist.name + '"' + selected + '>' + dist.zipcode + ' ' + dist.name + '</option>')
+          distSelect.append('<option value="' + dist.name + '" data-zipcode="' + dist.zipcode + '"' + selected + '>' + dist.zipcode + ' ' + dist.name + '</option>')
         })
       })
     }
@@ -74,7 +74,7 @@ $Gaia.init_zipcode_selector = function() {
     $.get(city.zipcodes_endpoint, null, function(dists) {
       dists.forEach(function(dist) {
         if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
-        distSelect.append('<option value="' + dist.zipcode + '">' + dist.zipcode + ' ' + dist.name + '</option>')
+        distSelect.append('<option value="' + dist.name + '" data-zipcode="' + dist.zipcode + '">' + dist.zipcode + ' ' + dist.name + '</option>')
       })
     })
   }
@@ -104,7 +104,10 @@ $Gaia.init_zipcode_selector = function() {
       zipcode.initDistSelect($(this).val());
     });
     zipcode.distSelect.on('change', function() {
-      $(zipcode).val($(this).val());
+      var value = zipcode.distSelect.find('option[value=' + $(this).val() +']').last().data('zipcode')
+      if(value) {
+        $(zipcode).val(value);
+      }
     });
     $(zipcode).trigger('keypress')
   });
