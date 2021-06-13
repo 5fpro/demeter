@@ -27,7 +27,7 @@ $Gaia.init_zipcode_selector = function() {
     return res;
   }
   var applyZipcode = function(zipcode) {
-    zipcode ||= $(this).val()
+    zipcode = zipcode || $(this).val();
     if((zipcode + '').length > 0) {
       var dist = findDist(zipcode);
       if(dist) {
@@ -42,20 +42,24 @@ $Gaia.init_zipcode_selector = function() {
     this.changeDistSelect(dist);
   }
   var changeCitySelect = function(city_name) {
+    var zipcodeInput = this;
     var citySelect = this.citySelect;
     citySelect.html('<option>' + this.citySelect.attr('placeholder') +'</option>');
     $cityData.forEach(function(city) {
+      if(zipcodeInput.is_exclude(city.name)) { return; }
       var selected = city.name == city_name ? ' selected' : ''
       citySelect.append('<option value="' + city.name + '"' + selected + '>' + city.name + '</option>')
     });
   }
   var changeDistSelect = function(selected_dist) {
+    var zipcodeInput = this;
     var distSelect = this.distSelect;
     distSelect.html('<option>' + distSelect.attr('placeholder') +'</option>');
     var city = findCity(selected_dist.city_name);
     if(city) {
       $.get(city.zipcodes_endpoint, null, function(dists) {
         dists.forEach(function(dist) {
+          if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
           var selected = dist.zipcode == selected_dist.zipcode ? ' selected' : ''
           distSelect.append('<option value="' + dist.name + '"' + selected + '>' + dist.zipcode + ' ' + dist.name + '</option>')
         })
@@ -63,14 +67,20 @@ $Gaia.init_zipcode_selector = function() {
     }
   }
   var initDistSelect = function(city_name) {
+    var zipcodeInput = this;
     var distSelect = this.distSelect;
     distSelect.html('<option>' + this.distSelect.attr('placeholder') +'</option>');
     var city = findCity(city_name);
     $.get(city.zipcodes_endpoint, null, function(dists) {
       dists.forEach(function(dist) {
+        if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
         distSelect.append('<option value="' + dist.zipcode + '">' + dist.zipcode + ' ' + dist.name + '</option>')
       })
     })
+  }
+
+  var is_exclude = function(value) {
+    return this.exclude.includes(value);
   }
   $('.js-gaia-zipcode').each(function() {
     var zipcode = this;
@@ -81,6 +91,8 @@ $Gaia.init_zipcode_selector = function() {
     zipcode.changeCitySelect = changeCitySelect;
     zipcode.changeDistSelect = changeDistSelect;
     zipcode.initDistSelect = initDistSelect;
+    zipcode.exclude = ($(zipcode).data('exclude') || '').split(',');
+    zipcode.is_exclude = is_exclude;
     var timeoutId = 0;
     $(zipcode).on('keypress', function() {
       clearTimeout(timeoutId);

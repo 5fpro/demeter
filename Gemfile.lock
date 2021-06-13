@@ -226,7 +226,7 @@ GEM
     et-orbi (1.2.4)
       tzinfo
     excon (0.73.0)
-    execjs (2.7.0)
+    execjs (2.8.1)
     factory_bot (5.1.2)
       activesupport (>= 4.2.0)
     factory_bot_rails (5.1.1)
@@ -443,9 +443,6 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    restcountry (0.6.0)
-      faraday
-      json
     rexml (3.2.4)
     rgeo (2.1.1)
     rgeo-activerecord (6.2.1)
@@ -615,7 +612,6 @@ DEPENDENCIES
   pg
   rails (~> 5.2)
   rails_real_favicon
-  restcountry
   rspec
   rspec-rails
   rubocop
@@ -635,4 +631,4 @@ RUBY VERSION
    ruby 2.6.3p62
 
 BUNDLED WITH
-   2.1.4
+   2.2.10

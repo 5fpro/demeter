@@ -8,10 +8,17 @@ class ExportToDistContext < BaseContext
     export_banks!
     export_countries!
     export_zipcodes!
-    `cp #{Rails.root.join('app/assets/javascripts/zipcode-selector.js')} #{@dir.join('tw')}`
+    export_zipcodes_js!
   end
 
   private
+
+  def export_zipcodes_js!
+    source = Rails.root.join('app/assets/javascripts/zipcode-selector.js')
+    target = @dir.join('tw/zipcode-selector.js')
+    content = IO.read(source)
+    IO.write(target, Uglifier.compile(content, harmony: true))
+  end
 
   def export_index!
     IO.write(@dir.join('index.html'), '<script>location.href="/index.json";</script>')
