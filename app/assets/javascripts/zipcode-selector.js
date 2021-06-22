@@ -29,6 +29,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   var applyZipcode = function(zipcode) {
     zipcode = zipcode || $(this).val();
     if((zipcode + '').length > 0) {
+      zipcode = (zipcode + '').substring(0, 3)
       var dist = findDist(zipcode);
       if(dist) {
         this.changeSelects(dist);
