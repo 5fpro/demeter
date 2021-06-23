@@ -45,7 +45,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   var changeCitySelect = function(city_name) {
     var zipcodeInput = this;
     var citySelect = this.citySelect;
-    citySelect.html('<option>' + this.citySelect.attr('placeholder') +'</option>');
+    citySelect.html('<option value="">' + this.citySelect.attr('placeholder') +'</option>');
     $DemeterTWCityData.forEach(function(city) {
       if(zipcodeInput.is_exclude(city.name)) { return; }
       var selected = city.name == city_name ? ' selected' : ''
@@ -55,7 +55,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   var changeDistSelect = function(selected_dist) {
     var zipcodeInput = this;
     var distSelect = this.distSelect;
-    distSelect.html('<option>' + distSelect.attr('placeholder') +'</option>');
+    distSelect.html('<option value="">' + distSelect.attr('placeholder') +'</option>');
     var city = findCity(selected_dist.city_name);
     if(city) {
       $.get(city.zipcodes_endpoint, null, function(dists) {
@@ -70,7 +70,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   var initDistSelect = function(city_name) {
     var zipcodeInput = this;
     var distSelect = this.distSelect;
-    distSelect.html('<option>' + this.distSelect.attr('placeholder') +'</option>');
+    distSelect.html('<option value="">' + this.distSelect.attr('placeholder') +'</option>');
     var city = findCity(city_name);
     $.get(city.zipcodes_endpoint, null, function(dists) {
       dists.forEach(function(dist) {
