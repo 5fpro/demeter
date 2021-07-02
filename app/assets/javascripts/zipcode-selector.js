@@ -33,6 +33,8 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
       var dist = findDist(zipcode);
       if(dist) {
         this.changeSelects(dist);
+      } else {
+        this.changeCitySelect();
       }
     } else {
       this.changeCitySelect();
@@ -86,6 +88,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   trigger_selector = trigger_selector || '.js-demeter-tw-zipcode-selector';
   $(trigger_selector).each(function() {
     var zipcode = this;
+    $(zipcode).attr('pattern', '[0-9]+')
     zipcode.citySelect = $($(zipcode).data('city'));
     zipcode.distSelect = $($(zipcode).data('dist'));
     zipcode.applyZipcode = applyZipcode;
