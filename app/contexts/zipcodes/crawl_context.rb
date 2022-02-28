@@ -19,8 +19,9 @@ module Zipcodes
         city['districts'].each do |dist|
           next if dist['name'] == '釣魚臺'
 
-          zipcode = Zipcode.find_or_create_by(country_code: 'TW', code: dist['zip'])
-          zipcode.update(city: city_name, name: dist['name'])
+          identity = "#{dist['zip']}#{dist['name']}"
+          zipcode = Zipcode.find_or_initialize_by(country_code: 'TW', identity: identity)
+          zipcode.update(city: city_name, name: dist['name'], code: dist['zip'])
         end
       end
     end

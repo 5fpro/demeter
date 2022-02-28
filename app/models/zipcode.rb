@@ -2,24 +2,27 @@
 #
 # Table name: zipcodes
 #
-#  id           :bigint           not null, primary key
-#  country_code :string
-#  code         :string
-#  name         :string
-#  state        :string
-#  city         :string
-#  data         :jsonb
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id             :bigint           not null, primary key
+#  country_code   :string
+#  code           :string
+#  name           :string
+#  state          :string
+#  city           :string
+#  data           :jsonb
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  identity(識別) :string
 #
 # Indexes
 #
-#  index_zipcodes_on_country_code           (country_code)
-#  index_zipcodes_on_country_code_and_code  (country_code,code)
+#  index_zipcodes_on_country_code               (country_code)
+#  index_zipcodes_on_country_code_and_code      (country_code,code)
+#  index_zipcodes_on_country_code_and_identity  (country_code,identity)
 #
 class Zipcode < ApplicationRecord
   validates :country_code, presence: true
-  validates :code, presence: true, uniqueness: { scope: :country_code }
+  validates :code, presence: true
+  validates :identity, presence: true, uniqueness: { scope: :country_code }
   validates :name, presence: true
 
   scope :country, ->(country_code) { where(country_code: country_code.to_s.upcase) }

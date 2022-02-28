@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_11_092846) do
+ActiveRecord::Schema.define(version: 2022_02_28_091303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "fuzzystrmatch"
@@ -318,7 +318,9 @@ ActiveRecord::Schema.define(version: 2020_10_11_092846) do
     t.jsonb "data", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "identity", comment: "識別"
     t.index ["country_code", "code"], name: "index_zipcodes_on_country_code_and_code"
+    t.index ["country_code", "identity"], name: "index_zipcodes_on_country_code_and_identity"
     t.index ["country_code"], name: "index_zipcodes_on_country_code"
   end
 
