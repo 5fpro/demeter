@@ -8,3 +8,13 @@
   - Setting.omniauth.providers.keys.each do |provider|
     br/
     = link_to tv('button-oauth', provider: t("omniauth.providers.#{provider}")), tyr.send("auth_#{provider}_path"), method: :post
+
+.field.field--expanded
+  .control
+    select#new-receiver-address-city.select.optional name="receiver_address[city]" placeholder="請選擇縣市"
+.field.field--expanded
+  .control
+    select#new-receiver-address-dist.select.optional include_blank="false" name="receiver_address[district]" placeholder="鄉鎮市區"
+.field.field--expanded
+  .control
+    input#zip_code-new.input.string.required.js-demeter-tw-zipcode-selector type="tel" name="receiver_address[zip_code]" data-city="#new-receiver-address-city" data-dist="#new-receiver-address-dist" placeholder="郵遞區號"
