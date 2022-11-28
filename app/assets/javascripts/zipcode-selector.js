@@ -8,13 +8,23 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   $.ajax({ url: 'https://demeter.5fpro.com/tw/zipcodes.json', async: false, success: function(data) {
     $DemeterTWDistData = data;
   }});
-  var findDist = function(zipcode) {
-    var res = null
+  var findDist = function(zipcode, selected_dist) {
+    var res = null;
+    var tmpRes = null;
     $DemeterTWDistData.forEach(function(dist) {
       if(dist.zipcode == zipcode) {
-        res = dist;
+        if(selected_dist) {
+          if(selected_dist == dist.name) {
+            res = dist;
+          } else {
+            tmpRes = dist
+          }
+        } else {
+          res = dist;
+        }
       }
     })
+    res = res || tmpRes;
     return res;
   }
   var findCity = function(city_name) {
@@ -28,9 +38,10 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   }
   var applyZipcode = function(zipcode) {
     zipcode = zipcode || $(this).val();
+    var dist_value = $(this).val() ? $(this).data('selected-dist') : null;
     if((zipcode + '').length > 0) {
       zipcode = (zipcode + '').substring(0, 3)
-      var dist = findDist(zipcode);
+      var dist = findDist(zipcode, dist_value);
       if(dist) {
         this.changeSelects(dist);
       } else {
@@ -63,7 +74,7 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
       $.get(city.zipcodes_endpoint, null, function(dists) {
         dists.forEach(function(dist) {
           if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
-          var selected = dist.zipcode == selected_dist.zipcode ? ' selected' : ''
+          var selected = (dist.zipcode == selected_dist.zipcode && dist.name == selected_dist.name) ? ' selected' : ''
           distSelect.append('<option value="' + dist.name + '" data-zipcode="' + dist.zipcode + '"' + selected + '>' + dist.zipcode + ' ' + dist.name + '</option>')
         })
       })
