@@ -9,6 +9,7 @@ class ExportToDistContext < BaseContext
     export_countries!
     export_zipcodes!
     export_zipcodes_js!
+    export_tw_identity_places!
   end
 
   private
@@ -96,5 +97,15 @@ class ExportToDistContext < BaseContext
         IO.write(country_dir.join('zipcode', "#{city.full_name}.json"), Zipcode.country(country_code).where(city: city.name, state: city.state).ordered.map(&:to_h).to_json)
       end
     end
+  end
+
+  def export_tw_identity_places!
+    data = ::Crawlers::TwIdnetityPlaceContext.new.perform.to_a.map do |arr|
+      {
+        id: arr.first,
+        label: arr.last
+      }
+    end
+    IO.write(@dir.join('tw', 'identity_places.json'), { places: data }.to_json)
   end
 end

@@ -193,3 +193,6 @@ Style/HashTransformValues:
 
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
+
+Lint/SafeNavigationChain:
+  Enabled: false
