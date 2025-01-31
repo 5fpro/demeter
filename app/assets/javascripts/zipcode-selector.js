@@ -1,13 +1,27 @@
 $Demeter = {};
 $DemeterTWCityData = {};
 $DemeterTWDistData = {};
-$Demeter.initTWZipcodeSelector = function(trigger_selector) {
-  $.ajax({ url: 'https://demeter.5fpro.com/tw/zipcode/cities.json', async: false, success: function(data) {
-    $DemeterTWCityData = data;
-  }});
-  $.ajax({ url: 'https://demeter.5fpro.com/tw/zipcodes.json', async: false, success: function(data) {
-    $DemeterTWDistData = data;
-  }});
+$Demeter.fetchData = function() {
+  if (Object.keys($DemeterTWCityData).length == 0) {
+    $.ajax({
+      url: "https://demeter.5fpro.com/tw/zipcode/cities.json",
+      async: false,
+      success: function(data) {
+        $DemeterTWCityData = data;
+      }
+    });
+  }
+  if (Object.keys($DemeterTWDistData).length == 0) {
+    $.ajax({
+      url: "https://demeter.5fpro.com/tw/zipcodes.json",
+      async: false,
+      success: function(data) {
+        $DemeterTWDistData = data;
+      }
+    });
+  }
+};
+$Demeter.initTWZipcodeSelector = function(triggerSelector) {
   var findDist = function(zipcode, selected_dist) {
     var res = null;
     var tmpRes = null;
@@ -103,10 +117,13 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
   var is_exclude = function(value) {
     return this.exclude.includes(value);
   }
-  trigger_selector = trigger_selector || '.js-demeter-tw-zipcode-selector';
-  $(trigger_selector).each(function() {
+  triggerSelector = triggerSelector || ".js-demeter-tw-zipcode-selector";
+  if ($(triggerSelector).length > 0) {
+    $Demeter.fetchData();
+  }
+  $(triggerSelector).each(function() {
     var zipcode = this;
-    $(zipcode).attr('pattern', '\\d+').attr('type', 'tel').attr('maxlength', '3').attr('minlength', '3');
+    $(zipcode).attr('pattern', '\\d+').attr('type', 'tel').attr('maxlength', '6').attr('minlength', '3').attr('inputmode', 'numeric');
     zipcode.citySelect = $($(zipcode).data('city'));
     zipcode.distSelect = $($(zipcode).data('dist'));
     zipcode.applyZipcode = applyZipcode;
@@ -117,35 +134,37 @@ $Demeter.initTWZipcodeSelector = function(trigger_selector) {
     zipcode.exclude = ($(zipcode).data('exclude') || '').split(',');
     zipcode.is_exclude = is_exclude;
     var timeoutId = 0;
-    $(zipcode).on('keyup', function() {
-      if(this.reportValidity) {
-        this.reportValidity();
-      }
-    });
-    $(zipcode).on('keypress', function(event) {
-      if(event.keyCode < 48 || event.keyCode > 57) {
-        if(this.reportValidity) { this.reportValidity(); }
+    $(zipcode).on("keyup", function(event) {
+      if (!event.key.match(/[0-9]/)) {
+        if (this.reportValidity) {
+          this.reportValidity();
+          return false;
+        }
         return false;
+      } else {
+        if (this.reportValidity) {
+          this.reportValidity();
+        }
       }
       clearTimeout(timeoutId);
       timeoutId = setTimeout(function() {
         zipcode.applyZipcode();
-      }, 500)
+      }, 500);
     });
-    zipcode.citySelect.on('change', function() {
-      $(zipcode).val('');
+    zipcode.citySelect.on("change", function() {
+      $(zipcode).val("");
       zipcode.initDistSelect($(this).val());
     });
-    zipcode.distSelect.on('change', function() {
-      var value = zipcode.distSelect.find('option[value=' + $(this).val() +']').last().data('zipcode')
-      if(value) {
+    zipcode.distSelect.on("change", function() {
+      var value = zipcode.distSelect.find('option[value=' + $(this).val() +']').last().data('zipcode');
+      if (value) {
         $(zipcode).val(value);
       }
     });
-    $(zipcode).trigger('keypress')
+    zipcode.applyZipcode();
   });
-}
+};
 
 $(function() {
   $Demeter.initTWZipcodeSelector();
-})
+});

@@ -12,8 +12,6 @@ class ExportToDistContext < BaseContext
     export_tw_identity_places!
   end
 
-  private
-
   def export_zipcodes_js!
     source = Rails.root.join('app/assets/javascripts/zipcode-selector.js')
     target = @dir.join('tw/zipcode-selector.js')

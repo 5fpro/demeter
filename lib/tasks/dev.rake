@@ -14,4 +14,7 @@ namespace :dev do
     puts "Admin email: #{email} password: '#{password}'"
   end
 
+  task tw_zipcode_js: :environment do
+    ExportToDistContext.new.export_zipcodes_js!
+  end
 end
