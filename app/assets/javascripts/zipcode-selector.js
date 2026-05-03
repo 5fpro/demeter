@@ -57,6 +57,11 @@ $Demeter.initTWZipcodeSelector = function(triggerSelector) {
   var applyZipcode = function(zipcode) {
     zipcode = zipcode || $(this).val();
     var dist_value = $(this).val() ? $(this).data('selected-dist') : null;
+    if (!dist_value && $(this).data('selected-dist')) {
+      dist_value = {
+        name: $(this).data('selected-dist'),
+      }
+    }
     if((zipcode + '').length > 0) {
       zipcode = (zipcode + '').substring(0, 3)
       var dist = findDist(zipcode, dist_value);
@@ -68,7 +73,7 @@ $Demeter.initTWZipcodeSelector = function(triggerSelector) {
       }
     } else {
       this.changeCitySelect();
-      this.changeDistSelect();
+      this.changeDistSelect(dist_value);
     }
   }
   var changeSelects = function(dist) {
@@ -96,6 +101,7 @@ $Demeter.initTWZipcodeSelector = function(triggerSelector) {
         dists.forEach(function(dist) {
           if(zipcodeInput.is_exclude(dist.zipcode) || zipcodeInput.is_exclude(dist.name)) { return; }
           var selected = (dist.zipcode == selected_dist.zipcode && dist.name == selected_dist.name) ? ' selected' : ''
+          if (selected == '' && dist.name == selected_dist.name) { selected = ' selected' }
           distSelect.append('<option value="' + dist.name + '" data-zipcode="' + dist.zipcode + '"' + selected + '>' + dist.zipcode + ' ' + dist.name + '</option>')
         })
       })
